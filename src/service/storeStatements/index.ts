@@ -62,6 +62,7 @@ export default (config: Config) => {
       updateFullActivities({ config, models: unstoredModels, client: opts.client }),
       config.repo.incrementStoreCount({ client: opts.client, count: unstoredModels.length }),
     ]).catch((err) => {
+      /* istanbul ignore next */
       config.logger.error('Error in unawaited updates', err);
     });
 
