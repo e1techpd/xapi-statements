@@ -17,6 +17,7 @@ const repo: Repo = facade({
   },
   events: {
     facade: config.repoFactory.eventsRepoName,
+    fake: {},
     redis: {
       prefix: config.redis.prefix,
       url: config.redis.url,

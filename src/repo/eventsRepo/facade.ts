@@ -8,6 +8,8 @@ export default (config: Config): Repo => {
   switch (config.facade) {
     case 'test':
       return fakeEventsRepo();
+    case 'fake':
+      return fakeEventsRepo();
     default: case 'redis':
       return redisEventsRepo({
         client: redis.createClient({
