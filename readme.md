@@ -1,31 +1,75 @@
 # xAPI Statements
 
-[![NPM Package Version](https://badge.fury.io/js/xapi-statements.svg)](https://www.npmjs.com/package/xapi-statements)
-[![Build Status](https://circleci.com/gh/LearningLocker/xapi-statements/tree/master.svg?style=shield)](https://circleci.com/gh/LearningLocker/xapi-statements)
-[![Renovate badge](https://img.shields.io/badge/Renovate-enabled-brightgreen.svg)](https://renovateapp.com/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Join the chat at https://gitter.im/LearningLocker/learninglocker](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/LearningLocker/learninglocker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Fork from https://github.com/learninglocker/xapi-statements.
 
-*Learning Locker is a trademark of [HT2 Inc.](http://ht2labs.com)*
+We make the following changes to deploy xapi-statements individually:
 
-### Installation
-To install all of Learning Locker, see the [installation documentation](http://docs.learninglocker.net/guides-installing/). To install just the xAPI statements service, you can follow the instructions below.
+1. Support deploy without redis.
 
-1. Clone the repository `git clone git@github.com:LearningLocker/xapi-statements.git`.
-1. Install dependencies `npm install`.
-1. Build the code `npm run build`.
-1. Start the server `npm start`.
+    We use kinesis to ingest statements so we don't need redis. As the project already has a FakeEventsRepo for testing purpose, we just change the repoFacade to enable the FakeEventsRepo on production.
 
-### Development
-1. Follow [the installation procedure](#installation).
-1. Make your changes to the "src" directory.
-1. Build the code `npm run build`.
-1. Test the code `npm run test-all`.
-1. Run the server `npm start`.
+2. Add base url prefix "/data" to align with xapi-service.
 
-### Docker
-You can use the steps below to install and run the xAPI statements service.
+    This change is to ensure the endpoints dont' change if we would need a full-function xapi-service in the future.
 
-- Create a ".env" file using the ".env.example" file in this Github repository.
-- Pull the image from DockerHub `docker pull learninglocker/xapi-statements:master`.
-- Run the image in a container `docker run -d -p 8080:80 --env-file .env learninglocker/xapi-statements:master`.
+3. Change the dockerfile to use node:8-alpine as base image.
+
+    We would try use alpine as base image if possible.
+
+## Development
+
+A custom branch is created for this customize version. Ideally, once a new version is released, the changes should be merged in the custom branch and tag with the version number.
+
+## Sync updates from up-stream
+
+Basically just create pull request from upstream.
+
+Details TBD.
+
+## Merge new version
+
+1. Create a new branch for the new version source code (use v5.0.1 as example).
+
+```sh
+git checkout tags/v5.0.1 -b v5.0.1
+```
+
+2. Create a new branch for the custom code.
+
+```sh
+git checkout custom
+git branch c5.0.1
+```
+
+3. Merge the new updates to the custom code.
+
+```sh
+git checkout c5.0.1
+git merge v5.0.1
+```
+
+4. Merge c5.0.1 to custom
+
+```sh
+git checkout custom
+git merge c5.0.1
+```
+
+5. Add tag in custom branch
+
+```sh
+git tag c5.0.1
+```
+
+6. Push
+
+```sh
+git push
+```
+
+7. Delete temp branches
+
+```sh
+git branch -d v5.0.1
+git branch -d c5.0.1
+```
