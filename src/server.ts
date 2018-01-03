@@ -34,9 +34,9 @@ const handleExit = (event: string) => {
   };
 };
 
-app.use(aboutRoute, presenterFacade.aboutRouter);
-app.use(fullActivitiesRoute, presenterFacade.fullActivitiesRouter);
-app.use(statementsRoute, presenterFacade.statementsRouter);
+app.use(config.express.xAPIPrefix + aboutRoute, presenterFacade.aboutRouter);
+app.use(config.express.xAPIPrefix + fullActivitiesRoute, presenterFacade.fullActivitiesRouter);
+app.use(config.express.xAPIPrefix + statementsRoute, presenterFacade.statementsRouter);
 
 app.listen(config.express.port, () => {
   logger.info(`Listening on port ${config.express.port}`);

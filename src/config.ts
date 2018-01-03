@@ -48,6 +48,7 @@ export default {
   },
   express: {
     port: getNumberOption(process.env.EXPRESS_PORT, 80),
+    xAPIPrefix: getStringOption(process.env.XAPI_PREFIX, '/data'),
     customRoute: getStringOption(process.env.EXPRESS_CUSTOM_ROUTE, 'status'),
     customRouteText: getStringOption(process.env.EXPRESS_CUSTOM_ROUTE_TEXT, 'ok'),
     morganDirectory: getStringOption(process.env.EXPRESS_MORGAN_DIRECTORY, `${storageDir}/accessLogs`),
