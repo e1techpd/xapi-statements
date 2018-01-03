@@ -34,42 +34,27 @@ Details TBD.
 git checkout tags/v5.0.1 -b v5.0.1
 ```
 
-2. Create a new branch for the custom code.
+2. Merge the new updates to the custom branch.
 
 ```sh
 git checkout custom
-git branch c5.0.1
-```
-
-3. Merge the new updates to the custom code.
-
-```sh
-git checkout c5.0.1
 git merge v5.0.1
 ```
 
-4. Merge c5.0.1 to custom
-
-```sh
-git checkout custom
-git merge c5.0.1
-```
-
-5. Add tag in custom branch
+3. Add tag in custom branch
 
 ```sh
 git tag c5.0.1
 ```
 
-6. Push
+4. Push
 
 ```sh
-git push
+git push origin custom:custom
 ```
 
-7. Delete temp branches
+5. Delete temp branches
 
 ```sh
 git branch -d v5.0.1
-git branch -d c5.0.1
 ```
