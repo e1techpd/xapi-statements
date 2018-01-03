@@ -1,12 +1,30 @@
-FROM node:8@sha256:552348163f074034ae75643c01e0ba301af936a898d778bb4fc16062917d0430
+FROM node:8 AS build-env
 ENV NPM_CONFIG_LOGLEVEL warn
-WORKDIR /usr/src/app
+WORKDIR /build
+
+COPY . ./
+
+RUN npm install
+RUN npm run build
+
+FROM node:8 AS dependency-env
+ENV NPM_CONFIG_LOGLEVEL warn
+WORKDIR /build
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
+
 RUN npm install --production
 RUN npm prune
-COPY dist dist
+
+FROM node:8-alpine
+ENV NPM_CONFIG_LOGLEVEL warn
+WORKDIR /app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+COPY --from=build-env /build/dist ./dist
+COPY --from=dependency-env /build/node_modules ./node_modules
 
 EXPOSE 80
 CMD ["npm", "start"]

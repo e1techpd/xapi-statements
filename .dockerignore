@@ -1,1 +1,9 @@
-node_modules
+.circleci/
+dist/
+docs/
+node_modules/
+storage/
+.env
+.nvmrc
+renovate.json
+tslint.ci.json
