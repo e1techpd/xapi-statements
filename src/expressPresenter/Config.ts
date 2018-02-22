@@ -8,6 +8,8 @@ interface Config extends CommonExpressConfig {
   service: Service;
   translator: Translator;
   tracker: Promise<Tracker>;
+  allowUndefinedMethod: boolean;
+  allowFormBody: boolean;
 }
 
 export default Config;

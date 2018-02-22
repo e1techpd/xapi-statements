@@ -1,10 +1,10 @@
 import * as fs from 'fs-extra';
 import Signature, { Opts } from './Signature';
-import Config from '../utils/localStorage/Config';
+import FacadeConfig from '../utils/localStorage/FacadeConfig';
 import getAttachmentDir from '../../../utils/getAttachmentDir';
 import getAttachmentPath from '../../../utils/getAttachmentPath';
 
-export default (config: Config): Signature => {
+export default (config: FacadeConfig): Signature => {
   return async ({ lrs_id, models }) => {
     const dir = getAttachmentDir({ subFolder: config.storageDir, lrs_id });
     await fs.ensureDir(dir);
