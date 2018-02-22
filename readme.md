@@ -28,13 +28,17 @@ Details TBD.
 
 ## Merge new version
 
-1. Create a new branch for the new version source code (use v5.0.1 as example).
+1. Create pull request, merge all changes from https://github.com/learninglocker/xapi-statements.
+
+2. Create tag for the new version.
+
+3. Create a new branch for the new version source code (use v5.0.1 as example).
 
 ```sh
 git checkout tags/v5.0.1 -b v5.0.1
 ```
 
-2. Merge the new updates to the custom branch.
+4. Merge the new updates to the custom branch.
 
 ```sh
 git checkout custom
@@ -46,21 +50,22 @@ Resolve conflict if any. Ensure the readme.md file and the changes included in f
 - dd3df93a9c10e742a62e15414b1229ad6b2e817d
 - 5f3addaac912f87c2baaf36fd381e57737e4ecdb
 
-3. Add tag in custom branch
+5. Add tag in custom branch
 
 ```sh
 git tag c5.0.1
 ```
 
-4. Push
+6. Push
 
 ```sh
 git push origin custom:custom
 git push origin --tags c5.0.1
 ```
 
-5. Delete temp branches
+7. Delete temp branches
 
 ```sh
 git branch -d v5.0.1
 ```
+

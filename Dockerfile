@@ -1,4 +1,5 @@
 FROM node:8 AS build-env
+
 ENV NPM_CONFIG_LOGLEVEL warn
 WORKDIR /build
 

@@ -24,6 +24,8 @@ const presenterFacade = presenter({
   tracker,
   translator,
   logger,
+  allowUndefinedMethod: config.express.allowUndefinedMethod,
+  allowFormBody: config.express.allowFormBody,
 });
 
 const handleExit = (event: string) => {
