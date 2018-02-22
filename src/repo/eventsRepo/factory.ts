@@ -6,7 +6,7 @@ import FactoryConfig from './FactoryConfig';
 
 export default (config: FactoryConfig): Facade => {
   switch (config.facade) {
-    case 'test':
+    case 'fake':
       return fakeFactory();
     default: case 'redis':
       return redisFactory(config.redis);
